@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def authenticate_logged_in
-    redirect_to "/sessions/new" unless session.include?(:user_id)
+    redirect_to "/sessions/new" if session[:user_id] == nil
   end
   before_action :authenticate_logged_in
 
