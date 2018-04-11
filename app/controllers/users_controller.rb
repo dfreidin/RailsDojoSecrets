@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate_logged_in, only: [:new, :create]
+  before_action :authenticate_user_edit, only: [:show, :edit, :update, :destroy]
 
   def new
   end
@@ -44,5 +45,8 @@ class UsersController < ApplicationController
   end
   def user_edit_params
     params.require(:user).permit(:name, :email)
+  end
+  def authenticate_user_edit
+    redirect_to "/users/#{session[:user_id]}" unless params[:id].to_i == session[:user_id]
   end
 end
