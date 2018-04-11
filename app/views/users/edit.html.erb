@@ -1,0 +1,10 @@
+<%= form_for current_user, url: "/users/#{current_user.id}" do |f| %>
+    <p>Name: <%= f.text_field :name %></p>
+    <p>Email: <%= f.text_field :email %></p>
+    <%= submit_tag "Update" %>
+<% end %>
+<form action="/users/<%=current_user.id%>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Account">
+</form>
